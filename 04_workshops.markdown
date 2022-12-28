@@ -18,7 +18,7 @@ Music is my main hobby but I like to combine it with my other ones.
 - Collecting records.
 
 ## Here's a couple of fractal wavetables I made.
-- This [Weirstrass function](https://github.com/rrags/roniloragodos/blob/main/assets/weirstrass_function.wav){:target="_blank"} is continuous but nowhere differentiable.
+- This [Weirstrass function](https://github.com/rrags/roniloragodos/blob/main/assets/weirstrass_function.wav){:target="_blank"} is continuous but nowhere differentiable. It's supposed to cause an auditory paradox because when played twice as fast, it should sound lower to most people.
 
 - This [Takagi curve](https://github.com/rrags/roniloragodos/blob/main/assets/takagi_curve.wav){:target="_blank"} is also a fractal curve, but is better behaved than a Weirstrass function. 
 
