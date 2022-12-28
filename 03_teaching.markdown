@@ -7,11 +7,9 @@ permalink: /teaching/
 
 ## Current TA responsibilities 
 
-### University of Iowa
-
 - Data Mining
 
-## Previous teaching experiences
+## Previous TA responsibilities
 
 - Spring 2019 - Spring 2022: Operations Management
 
