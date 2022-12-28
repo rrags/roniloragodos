@@ -19,7 +19,7 @@ Music is my main hobby but I like to combine it with my other ones.
 
 ## Here's a couple of fractal wavetables I made.
 Try them out in Serum or with an Arturia Mini/Microfreak.
-- This [Weirstrass function](https://github.com/rrags/roniloragodos/blob/main/assets/weirstrass_function.wav){:target="_blank"} is continuous but nowhere differentiable. It's supposed to cause an auditory paradox because when played twice as fast, it should sound lower to most people.
+- This [Weirstrass function](https://github.com/rrags/roniloragodos/blob/main/assets/weirstrass_function.wav){:target="_blank"} is continuous but nowhere differentiable. It's supposed to cause an auditory paradox because when played twice as fast it should sound lower to most people.
 
 - This [Takagi curve](https://github.com/rrags/roniloragodos/blob/main/assets/takagi_curve.wav){:target="_blank"} is also a fractal curve, but is better behaved than a Weirstrass function. 
 
