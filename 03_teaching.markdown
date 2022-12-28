@@ -11,9 +11,9 @@ permalink: /teaching/
 
 ## Previous TA responsibilities
 
-- Spring 2019 - Spring 2022: Operations Management
+- Fall 2020 - Spring 2022: Operations Management
 
-- Spring 2019: Business Analytics
+- Spring 2020: Business Analytics
 
 - Fall 2019: Calculus for the Biological Sciences
 
