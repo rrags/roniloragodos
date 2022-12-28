@@ -5,8 +5,9 @@ menu: main
 permalink: /workshops/
 ---
 
-## Music
-Many of my hobbies have something to do with music. 
+Music is my main hobby but I like to combine it with my other ones.
+
+## Music, Math, and DIY Electronics
 
 - Playing guitar, bass, and synthesizers (eurorack mainly).
 
@@ -16,6 +17,10 @@ Many of my hobbies have something to do with music.
 
 - Collecting records.
 
+# Here's a couple of fractal wavetables I made.
+- This [Weirstrass function](https://github.com/rrags/roniloragodos/blob/main/assets/weirstrass_function.wav){:target="_blank"} causes an auditory paradox because it sounds mostly the same when you play it twice as fast.
+
+- This [Takagi curve](https://github.com/rrags/roniloragodos/blob/main/assets/takagi_curve.wav){:target="_blank"} is also a fractal curve, but is better behaved than a Weirstrass function. 
 
 
 
