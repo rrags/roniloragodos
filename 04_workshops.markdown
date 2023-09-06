@@ -2,7 +2,7 @@
 layout: page
 title: Interests
 menu: main
-permalink: /workshops/
+permalink: /interests/
 ---
 
 Music is my main hobby but I like to combine it with my other ones.
@@ -16,6 +16,8 @@ Music is my main hobby but I like to combine it with my other ones.
 - Dabbling in production.
 
 - Collecting records.
+
+I also play Magic: The Gathering competitively. Please contact me if you want to make an AI to play MtG. It's something I've been meaning to do. 
 
 ## Here's a couple of fractal wavetables I made.
 Try them out in Serum or with an Arturia Mini/Microfreak.
