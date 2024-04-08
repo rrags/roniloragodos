@@ -257,7 +257,7 @@ TeX: {
   <li>Error threshold $\theta\geq 0$​</li>
 </ul>
 
-<p><b>Definition 1</b> (Empirical Rashomon Set) <i> $\hat{R}_{\text{set}}(\mathcal{F},\mathcal{D}, \phi, \theta) := {f \in \mathcal{F} \mid \hat{L}(f) \leq \hat{L}(\hat{f}) + \theta}$ where $\hat{f}$</i> is an empirical risk minimizer for the training data $\mathcal{D}$ with respect to $\phi$​.</p>
+<p><b>Definition 1</b> (Empirical Rashomon Set) <i> $\hat{R}_{\text{set}}(\mathcal{F},\mathcal{D}, \phi, \theta) := \{f \in \mathcal{F} \mid \hat{L}(f) \leq \hat{L}(\hat{f}) + \theta\}$ where $\hat{f}$</i> is an empirical risk minimizer for the training data $\mathcal{D}$ with respect to $\phi$​.</p>
 
 <p>So importantly, we can see that Rashomon sets are associated to datasets and model classes. Fixing a dataset $\mathcal{D}$,  e.g. recording loan application approval outcomes based on applicant demographics, you could construct Rashomon sets of good decision trees or good linear models. Further, the Rashomon parameter $\theta$ controls how close the error of the models in the Rashomon set have to be to that of the empirical risk minimizer (i.e. how “good” the models are). Thus, for any given dataset, there are many possible Rashomon sets.</p>
 
@@ -271,7 +271,7 @@ TeX: {
 
 <p>Visualizations and terminology such as the Rashomon <b>volume</b> suggest that Rashomon sets are infinite sets. At any rate, <b> Definition 1</b> implies that Rashomon sets can only be infnite when the hypothesis space $\mathcal{F}$ is taken to be infinite. The definition of hypothesis space used in <a href="https://arxiv.org/pdf/1908.01755.pdf">On the Existence of Simpler Machine Learning Models</a> should shed some light. They suppose that $X \subset \mathbb{R}^p$, $Y \subset \mathbb{R}$, and $X\times Y$ is bounded.</p>
 
-<p><b>Definition 2.1</b> (Hypothesis Space v1) <i> ${h:X\rightarrow Y}$, where $X$ is the instance space and $Y$ is the label space
+<p><b>Definition 2.1</b> (Hypothesis Space v1) <i> $\{h:X\rightarrow Y\}$, where $X$ is the instance space and $Y$ is the label space
 </i></p>
 
 <p>Here, instance and label space refer to the spaces of all possible instances their labels. Consider the following fun but strange example which follows the above assumptions. Suppose we want to estimate, at a certain time $t$, the probability that an identical copy of you existed at each coordinate in the universe. We could then let $X$ be the smooth set of coordinates around the universe using a coordinate system centered at yourself. We are interested in probabilities, so $Y=[0,1]$. Obviously there may be infinitely many potential hypotheses such a case.</p>
@@ -284,7 +284,7 @@ TeX: {
 
 <p><b>Definition 2.2</b> (Hypothesis Space v2) <i> All functions of the form $h_w(x) = \sigma (w^T x)$</i></p>
 
-<p>A crucial difference between Definition 2.1 and 2.2 is that Definition 2.2 does not require that the logistic regressions map into the label space. Recall that logistic regressions map into $[0,1]^{\mid Y\mid}$ and not $Y$. That is, they output probabilities and not labels. So, assuming such, we have to introduce some thresholding mechanism $t:[0,1]^{\mid Y\mid}\rightarrow Y$ and consider instead the functions ${(t \circ h_w)\mid w\in \mathbb{R}^{d}}$. Obviously this still has an infinite parameterization via the infinite set of $w$, but the set itself is finite because the $(t \circ h_w)$ are mappings from $X$ to $Y$​​​.</p>
+<p>A crucial difference between Definition 2.1 and 2.2 is that Definition 2.2 does not require that the logistic regressions map into the label space. Recall that logistic regressions map into $[0,1]^{\mid Y\mid}$ and not $Y$. That is, they output probabilities and not labels. So, assuming such, we have to introduce some thresholding mechanism $t:[0,1]^{\mid Y\mid}\rightarrow Y$ and consider instead the functions $\{(t \circ h_w)\mid w\in \mathbb{R}^{d}\}$. Obviously this still has an infinite parameterization via the infinite set of $w$, but the set itself is finite because the $(t \circ h_w)$ are mappings from $X$ to $Y$​​​.</p>
 
 <p>So, we can think of hypothesis spaces as being finite when</p>
 
@@ -298,11 +298,11 @@ TeX: {
 
 <h4 id="hypothesis-space-as-equivalence-classes">Hypothesis Space as Equivalence Classes</h4>
 
-<p>The aforementioned ambiguity in the hypothesis space can be a point of confusion because there is a disconnect between the models we train in practice and their platonic ideals in a finite hypothesis space. That is, given some thresholding rule $t$, we can produce two logistic regressions $h_w$ and $h_{w’}$ such that $(t\circ h_w)$ and $(t\circ h_{w’})$ give the same mapping of the training data to the labels. Indeed, this may yield some uncertainty when thinking of a Rashomon set of logistic regressions for a finite training data set $E \subset X$ because , again, the Rashomon set is finite but in practice we are searching over the uncountable set of continuous vectors ${w\in \mathbb{R}^p}$ when training our classifiers. <i> If we want to be pedantic, we can understand that in practice the set ${w\in \mathbb{R}^{p}}$ can be considered to be finite because our computers can only use finite numerical precision….</i></p>
+<p>The aforementioned ambiguity in the hypothesis space can be a point of confusion because there is a disconnect between the models we train in practice and their platonic ideals in a finite hypothesis space. That is, given some thresholding rule $t$, we can produce two logistic regressions $h_w$ and $h_{w’}$ such that $(t\circ h_w)$ and $(t\circ h_{w’})$ give the same mapping of the training data to the labels. Indeed, this may yield some uncertainty when thinking of a Rashomon set of logistic regressions for a finite training data set $E \subset X$ because , again, the Rashomon set is finite but in practice we are searching over the uncountable set of continuous vectors $\{w\in \mathbb{R}^p\}$ when training our classifiers. <i> If we want to be pedantic, we can understand that in practice the set $\{w\in \mathbb{R}^{p}\}$ can be considered to be finite because our computers can only use finite numerical precision….</i></p>
 
 <p>At any rate, the following definition from transductive binary classification both formalizes and addresses the aforementioned problem of hypothesis ambiguity.</p>
 
-<p><b>Definition 2.3</b> (Hypothesis Space v3) <i>${[h]\ \mid \ h:X\rightarrow Y}$  where the members of the equivalence classes $[h]$ are equivalent under the relation $h\sim h’$ if they are identical in their binary classification of the data. </i></p>
+<p><b>Definition 2.3</b> (Hypothesis Space v3) <i>$\{[h]\ \mid \ h:X\rightarrow Y\}$  where the members of the equivalence classes $[h]$ are equivalent under the relation $h\sim h’$ if they are identical in their binary classification of the data. </i></p>
 
 <h2 id="example-using-polynomials">Example using Polynomials</h2>
 
@@ -331,9 +331,9 @@ TeX: {
   </tbody>
 </table>
 
-<p>We will define $\mathcal{F}$ as ${h:x\mapsto \mathbb{I}(\sum_{n=0}^5 a_n x^n\geq 0)\mid a_n \in \mathbb{R}, x \in X}$ and $\mathcal{F}’$ as ${h:x\mapsto \mathbb{I}(\sum_{n=0}^5 b_n x^n\geq 0) \mid b_n \in \mathbb{Z}_+, x \in X}\subset \mathcal{F}$ . Note that $\mathcal{F}$ may appear to be uncountably infinite because it is parameterized by real numbers, but it is actually finite because its definition sets the domain of the $h$ to be the 3 point set $X$ and the codomain of all of the $h$ is ${0,1}$ due to the indicator functions $\mathbb{1}$. Similarly,  $\mathcal{F}’$ is finite even though the set of positive integers is countably infinite.</p>
+<p>We will define $\mathcal{F}$ as $\{h:x\mapsto \mathbb{I}(\sum_{n=0}^5 a_n x^n\geq 0)\mid a_n \in \mathbb{R}, x \in X\}$ and $\mathcal{F}’$ as $\{h:x\mapsto \mathbb{I}(\sum_{n=0}^5 b_n x^n\geq 0) \mid b_n \in \mathbb{Z}_+, x \in X\}\subset \mathcal{F}$ . Note that $\mathcal{F}$ may appear to be uncountably infinite because it is parameterized by real numbers, but it is actually finite because its definition sets the domain of the $h$ to be the 3 point set $X$ and the codomain of all of the $h$ is $\{0,1\}$ due to the indicator functions $\mathbb{1}$. Similarly,  $\mathcal{F}’$ is finite even though the set of positive integers is countably infinite.</p>
 
-<p>The empirical risk minimizer which coincides with $y^*$ appears in $\mathcal{F}$ (it has $a_0 = \pi$ and $a_3=2$), but not $\mathcal{F}’$.  $\mathcal{F}$ actually contains all $3^2$ possible mappings while $\mathcal{F}’$ only contains 3 of them (exercise left to the reader). Set the loss $\phi$ to be misclassification error rate. $\mathcal{F}$ contains the empirical risk minimizer, which has misclassification error rate 0. Then if we set $\theta=\frac{1}{3}$, the $\theta$-Rashomon set $\hat{R}_{\text{set}}(\mathcal{F}_1,\mathcal{D}, \phi, \theta)$ would include only 3 models from $\mathcal{F}’$. An example of one of these is the mapping $-1\mapsto 0$, $1\mapsto 1$, $2\mapsto 1$, which has has misclassification error rate of $\frac{1}{3}$. The elements of $\mathcal{F}’$ with $(b_1,b_2,b_3,b_4,b_5) \in {(1,0,0,16,0), (2,3,0,0,0)}$ can be identified as a members of the equivalence class of models  which do the mapping  $-1\mapsto 0$, $1\mapsto 1$, $2\mapsto 1$.</p>
+<p>The empirical risk minimizer which coincides with $y^*$ appears in $\mathcal{F}$ (it has $a_0 = \pi$ and $a_3=2$), but not $\mathcal{F}’$.  $\mathcal{F}$ actually contains all $3^2$ possible mappings while $\mathcal{F}’$ only contains 3 of them (exercise left to the reader). Set the loss $\phi$ to be misclassification error rate. $\mathcal{F}$ contains the empirical risk minimizer, which has misclassification error rate 0. Then if we set $\theta=\frac{1}{3}$, the $\theta$-Rashomon set $\hat{R}_{\text{set}}(\mathcal{F}_1,\mathcal{D}, \phi, \theta)$ would include only 3 models from $\mathcal{F}’$. An example of one of these is the mapping $-1\mapsto 0$, $1\mapsto 1$, $2\mapsto 1$, which has has misclassification error rate of $\frac{1}{3}$. The elements of $\mathcal{F}’$ with $(b_1,b_2,b_3,b_4,b_5) \in \{(1,0,0,16,0), (2,3,0,0,0)\}$ can be identified as a members of the equivalence class of models  which do the mapping  $-1\mapsto 0$, $1\mapsto 1$, $2\mapsto 1$.</p>
 
 
 
