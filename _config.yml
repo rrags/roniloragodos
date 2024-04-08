@@ -29,14 +29,14 @@ github_username:  rrags
 #linkedin_username: brksonmez
 author_website: http://roniloragodos.com
 author_display: true
-#googlescholar_link: 
+googlescholar_link:https://scholar.google.com/citations?user=UAD3eTwAAAAJ 
 uni_link: 
 
 author: Ronilo Ragodos
 
 nav_ext_links:
   - name: CV
-    url: https://github.com/rrags/roniloragodos/raw/main/assets/CV.pdf
+    url: https://github.com/rrags/roniloragodos/blob/main/assets/CV.pdf
 
 # Build settings
 # theme: academic
