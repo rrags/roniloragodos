@@ -1,3 +1,21 @@
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    jax: ["input/TeX","input/MathML","output/SVG", "output/CommonHTML"],
+extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js", "CHTML-preview.js"],
+TeX: {
+  extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
+},
+  tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full"></script>
+
 $\require{amsmath}$
 
 $\require{amssymb}$
@@ -8,7 +26,7 @@ $\require{amsfonts}$
 
 I want to start my blog off by presenting what I consider to be the coolest contribution to my field I can think of currently - Rashomon Sets.  You can think of a Rashomon set simply as a set of good models for a dataset. At the time of writing, the theory of Rashomon sets has only been developed for binary classification and the only model classes they can be developed for are decision tree and GAMs. 
 
-Several really nice applications of the Rashomon set theory have developed. After giving a formal definition of a Rashomon set, I'll  summarize them. They include estimating the simplicity of a learning problem, finding how many good <b>simple</b> models appear in a Rashomon set, and deriving statistics for variable importance. I think I'll discuss these in future posts.
+Several really nice applications of the Rashomon set theory have been developed. They include estimating the simplicity of a learning problem, finding how many good <b>simple</b> models appear in a Rashomon set, and deriving statistics for variable importance. I think I'll discuss these in future posts.
 
 Having given a few seminar talks in my department's data mining seminar relating to Rashomon sets, I have identified some tricky bits that I want to clarify. I endeavor to cover these in this blog series. For this post, I want to focus on the questions relating to the cardinality of Rashomon sets. Here are some questions this post should answer.
 
@@ -38,9 +56,7 @@ So importantly, we can see that Rashomon sets are associated to datasets and mod
 
 ## How many are there?
 
-```
 ![Legendary Dudley Quote](https://i.pinimg.com/736x/7b/fc/58/7bfc58537619eb7729d98a39d3c47e8c.jpg)
-```
 
 ### Characterizations of Hypothesis Space
 
@@ -57,13 +73,13 @@ Here, instance and label space refer to the spaces of all possible instances the
 
 #### Hypothesis Space for Finite Data Sets
 
-The previous paragraph relates to a potential source of confusion based on readers' understanding of hypothesis spaces - hypothesis spaces are supposed to be finite right? Hypothesis spaces may alternatively be defined in terms of <i>unique</i> mappings from data to labels. When considering a hypothesis space in the context of an actual dataset (such that $|X|$ and $|Y|$ are both finite), the number of unique mappings $h:X\rightarrow Y$ is finite as well since for each $x\in X$, there are $|Y|$ possible ways to choose $h(x)$​​. 
+The previous paragraph relates to a potential source of confusion based on readers' understanding of hypothesis spaces - hypothesis spaces are supposed to be finite right? Hypothesis spaces may alternatively be defined in terms of <i>unique</i> mappings from data to labels. When considering a hypothesis space in the context of an actual dataset (such that $\mid X \mid$ and $\mid Y\mid$ are both finite), the number of unique mappings $h:X\rightarrow Y$ is finite as well since for each $x\in X$, there are $\mid Y \mid$ possible ways to choose $h(x)$. 
 
-However, the total number of mappings $h:X\rightarrow Y$ need not be finite, even if $X$ and $Y$ are both finite. Consider the family of possible logistic regressions one may produce for a given training data set. As they have the form $h_w(x) \mapsto \sigma(w^T x)$, it follows that the hypothesis space may be parameterized by the set of valid weight vectors $w\in \mathbb{R}^{|X|}$. This consideration suggests the following definition of hypothesis space for logistic regressions, and exemplifies the point that hypothesis spaces may be infinite due to being parameterized by the parameters of the models in the hypothesis space.
+However, the total number of mappings $h:X\rightarrow Y$ need not be finite, even if $X$ and $Y$ are both finite. Consider the family of possible logistic regressions one may produce for a given training data set. As they have the form $h_w(x) \mapsto \sigma(w^T x)$, it follows that the hypothesis space may be parameterized by the set of valid weight vectors $w\in \mathbb{R}^{\mid X\mid}$. This consideration suggests the following definition of hypothesis space for logistic regressions, and exemplifies the point that hypothesis spaces may be infinite due to being parameterized by the parameters of the models in the hypothesis space.
 
 <b>Definition 2.2</b> (Hypothesis Space v2) <i> All functions of the form $h_w(x) = \sigma (w^T x)$</i>
 
-A crucial difference between Definition 2.1 and 2.2 is that Definition 2.2 does not require that the logistic regressions map into the label space. Recall that logistic regressions map into $[0,1]^{|Y|}$ and not $Y$. That is, they output probabilities and not labels. So, assuming such, we have to introduce some thresholding mechanism $t:[0,1]^{|Y|}\rightarrow Y$ and consider instead the functions $\{(t \circ h_w)|w\in \mathbb{R}^{d}\}$. Obviously this still has an infinite parameterization via the infinite set of $w$, but the set itself is finite because the $(t \circ h_w)$ are mappings from $X$ to $Y$​​​. 
+A crucial difference between Definition 2.1 and 2.2 is that Definition 2.2 does not require that the logistic regressions map into the label space. Recall that logistic regressions map into $[0,1]^{\mid Y\mid}$ and not $Y$. That is, they output probabilities and not labels. So, assuming such, we have to introduce some thresholding mechanism $t:[0,1]^{\mid Y\mid}\rightarrow Y$ and consider instead the functions $\{(t \circ h_w)\mid w\in \mathbb{R}^{d}\}$. Obviously this still has an infinite parameterization via the infinite set of $w$, but the set itself is finite because the $(t \circ h_w)$ are mappings from $X$ to $Y$​​​. 
 
 So, we can think of hypothesis spaces as being finite when
 
@@ -91,7 +107,9 @@ Suppose we seek to learn an unknown ground truth function $y^*(x) = \mathbb{I}_{
 | 1    | 0    |
 | 2    | 1    |
 
-We will define $\mathcal{F}_1:=\{h:x\mapsto \mathbb{I}_{\sum_{n=0}^5 a_n x^n\geq 0}\mid a_n \in \mathbb{R}, x \in X\}$ and $\mathcal{F}_2:=\{h:x\mapsto \mathbb{I}_{\sum_{n=0}^5 b_n x^n\geq 0}\mid b_n \in \mathbb{Z}_+, x \in X\}\subset \mathcal{F}_1$ . Note that $\mathcal{F}_1$ may appear to be uncountably infinite because it is parameterized by real numbers, but it is actually finite because its definition sets the domain of the $h$ to be the 3 point set $X$ and the codomain of all of the $h$ is $\{0,1\}$ due to the indicator functions $\mathbb{1}$. Similarly,  $\mathcal{F}_2$ is finite even though the set of positive integers is countably infinite. 
 
- The empirical risk minimizer which coincides with $y^*$ appears in $\mathcal{F}_1$ (it has $a_0 = \pi$ and $a_3=2$), but not $\mathcal{F}_2$.  $\mathcal{F}_1$ actually contains all $3^2$ possible mappings while $\mathcal{F}_2$ only contains 3 of them (exercise left to the reader). Set the loss $\phi$ to be misclassification error rate. $\mathcal{F}_1$ contains the empirical risk minimizer, which has misclassification error rate 0. Then if we set $\theta=\frac{1}{3}$, the $\theta$-Rashomon set $\hat{R}_{\text{set}}(\mathcal{F}_1,\mathcal{D}, \phi, \theta)$ would include only 3 models from $\mathcal{F}_2$. An example of one of these is the mapping $-1\mapsto 0$, $1\mapsto 1$, $2\mapsto 1$, which has has misclassification error rate of $\frac{1}{3}$. The elements of $\mathcal{F}_2$ with $(b_1,b_2,b_3,b_4,b_5) \in \{(1,0,0,16,0), (2,3,0,0,0)\}$ can be identified as a members of the equivalence class of models  which do the mapping  $-1\mapsto 0$, $1\mapsto 1$, $2\mapsto 1$. 
+
+We will define $\mathcal{F}$ as $\{h:x\mapsto \mathbb{I}(\sum_{n=0}^5 a_n x^n\geq 0)\mid a_n \in \mathbb{R}, x \in X\}$ and $\mathcal{F}'$ as $\{h:x\mapsto \mathbb{I}(\sum_{n=0}^5 b_n x^n\geq 0) \mid b_n \in \mathbb{Z}_+, x \in X\}\subset \mathcal{F}$ . Note that $\mathcal{F}$ may appear to be uncountably infinite because it is parameterized by real numbers, but it is actually finite because its definition sets the domain of the $h$ to be the 3 point set $X$ and the codomain of all of the $h$ is $\{0,1\}$ due to the indicator functions $\mathbb{1}$. Similarly,  $\mathcal{F}'$ is finite even though the set of positive integers is countably infinite. 
+
+ The empirical risk minimizer which coincides with $y^*$ appears in $\mathcal{F}$ (it has $a_0 = \pi$ and $a_3=2$), but not $\mathcal{F}'$.  $\mathcal{F}$ actually contains all $3^2$ possible mappings while $\mathcal{F}'$ only contains 3 of them (exercise left to the reader). Set the loss $\phi$ to be misclassification error rate. $\mathcal{F}$ contains the empirical risk minimizer, which has misclassification error rate 0. Then if we set $\theta=\frac{1}{3}$, the $\theta$-Rashomon set $\hat{R}_{\text{set}}(\mathcal{F}_1,\mathcal{D}, \phi, \theta)$ would include only 3 models from $\mathcal{F}'$. An example of one of these is the mapping $-1\mapsto 0$, $1\mapsto 1$, $2\mapsto 1$, which has has misclassification error rate of $\frac{1}{3}$. The elements of $\mathcal{F}'$ with $(b_1,b_2,b_3,b_4,b_5) \in \{(1,0,0,16,0), (2,3,0,0,0)\}$ can be identified as a members of the equivalence class of models  which do the mapping  $-1\mapsto 0$, $1\mapsto 1$, $2\mapsto 1$. 
 

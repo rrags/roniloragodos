@@ -1,1 +1,134 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-02-28T17:01:55-06:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Ronilo Ragodos</title><subtitle>Graduate student at the University of Iowa</subtitle><author><name>Ronilo Ragodos</name></author><entry><title type="html">Sample</title><link href="http://localhost:4000/2023/02/28/sample.html" rel="alternate" type="text/html" title="Sample" /><published>2023-02-28T00:00:00-06:00</published><updated>2023-02-28T00:00:00-06:00</updated><id>http://localhost:4000/2023/02/28/sample</id><content type="html" xml:base="http://localhost:4000/2023/02/28/sample.html">\[\nabla_\boldsymbol{x} J(\boldsymbol{x})\]</content><author><name>ronilo</name></author><summary type="html">\[\nabla_\boldsymbol{x} J(\boldsymbol{x})\]</summary></entry></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-04-07T20:48:50-05:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Ronilo Ragodos</title><subtitle>Graduate student at the University of Iowa</subtitle><author><name>Ronilo Ragodos</name></author><entry><title type="html">Rashomon Set Sizes</title><link href="http://localhost:4000/2023/02/28/rashomon-set-sizes.html" rel="alternate" type="text/html" title="Rashomon Set Sizes" /><published>2023-02-28T00:00:00-06:00</published><updated>2023-02-28T00:00:00-06:00</updated><id>http://localhost:4000/2023/02/28/rashomon-set-sizes</id><content type="html" xml:base="http://localhost:4000/2023/02/28/rashomon-set-sizes.html">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
+  MathJax.Hub.Config({
+    jax: [&quot;input/TeX&quot;,&quot;input/MathML&quot;,&quot;output/SVG&quot;, &quot;output/CommonHTML&quot;],
+extensions: [&quot;tex2jax.js&quot;,&quot;mml2jax.js&quot;,&quot;MathMenu.js&quot;,&quot;MathZoom.js&quot;, &quot;CHTML-preview.js&quot;],
+TeX: {
+  extensions: [&quot;AMSmath.js&quot;,&quot;AMSsymbols.js&quot;,&quot;noErrors.js&quot;,&quot;noUndefined.js&quot;]
+},
+  tex2jax: {
+      inlineMath: [ [&apos;$&apos;,&apos;$&apos;], [&quot;\\(&quot;,&quot;\\)&quot;] ],
+      displayMath: [ [&apos;$$&apos;,&apos;$$&apos;], [&quot;\\[&quot;,&quot;\\]&quot;] ],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    &quot;HTML-CSS&quot;: { availableFonts: [&quot;TeX&quot;] }
+  });
+&lt;/script&gt;
+
+&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;$\require{amsmath}$&lt;/p&gt;
+
+&lt;p&gt;$\require{amssymb}$&lt;/p&gt;
+
+&lt;p&gt;$\require{amsfonts}$&lt;/p&gt;
+
+&lt;h1 id=&quot;rashomon-sets-pt-1---intro--how-big-are-they&quot;&gt;Rashomon Sets Pt. 1 - Intro &amp;amp; How big are they?&lt;/h1&gt;
+
+&lt;p&gt;I want to start my blog off by presenting what I consider to be the coolest contribution to my field I can think of currently - Rashomon Sets.  You can think of a Rashomon set simply as a set of good models for a dataset. At the time of writing, the theory of Rashomon sets has only been developed for binary classification and the only model classes they can be developed for are decision tree and GAMs.&lt;/p&gt;
+
+&lt;p&gt;Several really nice applications of the Rashomon set theory have been developed. They include estimating the simplicity of a learning problem, finding how many good &lt;b&gt;simple&lt;/b&gt; models appear in a Rashomon set, and deriving statistics for variable importance. I think I’ll discuss these in future posts.&lt;/p&gt;
+
+&lt;p&gt;Having given a few seminar talks in my department’s data mining seminar relating to Rashomon sets, I have identified some tricky bits that I want to clarify. I endeavor to cover these in this blog series. For this post, I want to focus on the questions relating to the cardinality of Rashomon sets. Here are some questions this post should answer.&lt;/p&gt;
+
+&lt;p&gt;Given the idea that a Rashomon set contains “all good models”:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Is it uncountable because, e.g. logistic regressions are parameterized by an uncountable family of weight vectors?&lt;/li&gt;
+  &lt;li&gt;Does it matter that most logistic regressions have uncomputable coefficients?&lt;/li&gt;
+  &lt;li&gt;Does it matter that two models with very close parameters can give the same mapping of the training data?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;rashomon-sets&quot;&gt;Rashomon Sets&lt;/h2&gt;
+
+&lt;p&gt;In essence, a Rashomon set for a learning problem is a set of models that have near optimal generalization error.&lt;/p&gt;
+
+&lt;p&gt;The actual definition is as follows.&lt;/p&gt;
+
+&lt;p&gt;Given&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Dataset $\mathcal{D}$&lt;/li&gt;
+  &lt;li&gt;Model Class $\mathcal{F}$​&lt;/li&gt;
+  &lt;li&gt;Loss function $\phi$​&lt;/li&gt;
+  &lt;li&gt;True risk $L$, Empirical Risk $L$&lt;/li&gt;
+  &lt;li&gt;Error threshold $\theta\geq 0$​&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;b&gt;Definition 1&lt;/b&gt; (Empirical Rashomon Set) &lt;i&gt; $\hat{R}_{\text{set}}(\mathcal{F},\mathcal{D}, \phi, \theta) := {f \in \mathcal{F} \mid \hat{L}(f) \leq \hat{L}(\hat{f}) + \theta}$ where $\hat{f}$&lt;/i&gt; is an empirical risk minimizer for the training data $\mathcal{D}$ with respect to $\phi$​.&lt;/p&gt;
+
+&lt;p&gt;So importantly, we can see that Rashomon sets are associated to datasets and model classes. Fixing a dataset $\mathcal{D}$,  e.g. recording loan application approval outcomes based on applicant demographics, you could construct Rashomon sets of good decision trees or good linear models. Further, the Rashomon parameter $\theta$ controls how close the error of the models in the Rashomon set have to be to that of the empirical risk minimizer (i.e. how “good” the models are). Thus, for any given dataset, there are many possible Rashomon sets.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-many-models-are-there&quot;&gt;How many (models) are there?&lt;/h2&gt;
+
+&lt;h3 id=&quot;characterizations-of-hypothesis-space&quot;&gt;Characterizations of Hypothesis Space&lt;/h3&gt;
+
+&lt;p&gt;I used the term &lt;i&gt;model class&lt;/i&gt; for $\mathcal{F}$ earlier to put off mentioning hypothesis spaces until now. The Rashomon set literature typically uses the symbol $\mathcal{F}$ to refer to a &lt;i&gt;hypothesis space&lt;/i&gt;. I believe that a source of confusion for why readers may be uncertain of which models from a model class appear in a Rashomon set is because the the term &lt;i&gt;hypothesis space&lt;/i&gt; has different definitions depending on where you look and those definitions may or may not allow a hypothesis space to be infinite. The nature of the data under consideration also matters because the number of possible unique classifiers of a space of data instances can be infinite if there are infinitely many possible data instances and finite otherwise.&lt;/p&gt;
+
+&lt;h4 id=&quot;infinite-hypothesis-space&quot;&gt;Infinite Hypothesis Space&lt;/h4&gt;
+
+&lt;p&gt;Visualizations and terminology such as the Rashomon &lt;b&gt;volume&lt;/b&gt; suggest that Rashomon sets are infinite sets. At any rate, &lt;b&gt; Definition 1&lt;/b&gt; implies that Rashomon sets can only be infnite when the hypothesis space $\mathcal{F}$ is taken to be infinite. The definition of hypothesis space used in &lt;a href=&quot;https://arxiv.org/pdf/1908.01755.pdf&quot;&gt;On the Existence of Simpler Machine Learning Models&lt;/a&gt; should shed some light. They suppose that $X \subset \mathbb{R}^p$, $Y \subset \mathbb{R}$, and $X\times Y$ is bounded.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Definition 2.1&lt;/b&gt; (Hypothesis Space v1) &lt;i&gt; ${h:X\rightarrow Y}$, where $X$ is the instance space and $Y$ is the label space
+&lt;/i&gt;&lt;/p&gt;
+
+&lt;p&gt;Here, instance and label space refer to the spaces of all possible instances their labels. Consider the following fun but strange example which follows the above assumptions. Suppose we want to estimate, at a certain time $t$, the probability that an identical copy of you existed at each coordinate in the universe. We could then let $X$ be the smooth set of coordinates around the universe using a coordinate system centered at yourself. We are interested in probabilities, so $Y=[0,1]$. Obviously there may be infinitely many potential hypotheses such a case.&lt;/p&gt;
+
+&lt;h4 id=&quot;hypothesis-space-for-finite-data-sets&quot;&gt;Hypothesis Space for Finite Data Sets&lt;/h4&gt;
+
+&lt;p&gt;The previous paragraph relates to a potential source of confusion based on readers’ understanding of hypothesis spaces - hypothesis spaces are supposed to be finite right? Hypothesis spaces may alternatively be defined in terms of &lt;i&gt;unique&lt;/i&gt; mappings from data to labels. When considering a hypothesis space in the context of an actual dataset (such that $\mid X \mid$ and $\mid Y\mid$ are both finite), the number of unique mappings $h:X\rightarrow Y$ is finite as well since for each $x\in X$, there are $\mid Y \mid$ possible ways to choose $h(x)$.&lt;/p&gt;
+
+&lt;p&gt;However, the total number of mappings $h:X\rightarrow Y$ need not be finite, even if $X$ and $Y$ are both finite. Consider the family of possible logistic regressions one may produce for a given training data set. As they have the form $h_w(x) \mapsto \sigma(w^T x)$, it follows that the hypothesis space may be parameterized by the set of valid weight vectors $w\in \mathbb{R}^{\mid X\mid}$. This consideration suggests the following definition of hypothesis space for logistic regressions, and exemplifies the point that hypothesis spaces may be infinite due to being parameterized by the parameters of the models in the hypothesis space.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Definition 2.2&lt;/b&gt; (Hypothesis Space v2) &lt;i&gt; All functions of the form $h_w(x) = \sigma (w^T x)$&lt;/i&gt;&lt;/p&gt;
+
+&lt;p&gt;A crucial difference between Definition 2.1 and 2.2 is that Definition 2.2 does not require that the logistic regressions map into the label space. Recall that logistic regressions map into $[0,1]^{\mid Y\mid}$ and not $Y$. That is, they output probabilities and not labels. So, assuming such, we have to introduce some thresholding mechanism $t:[0,1]^{\mid Y\mid}\rightarrow Y$ and consider instead the functions ${(t \circ h_w)\mid w\in \mathbb{R}^{d}}$. Obviously this still has an infinite parameterization via the infinite set of $w$, but the set itself is finite because the $(t \circ h_w)$ are mappings from $X$ to $Y$​​​.&lt;/p&gt;
+
+&lt;p&gt;So, we can think of hypothesis spaces as being finite when&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;$X$ and $Y$ are finite sets, or you are working with finite training data&lt;/li&gt;
+  &lt;li&gt;You consider hypothesis as being &lt;b&gt;“equivalent”&lt;/b&gt; in the sense of their mappings from $X$ to $Y$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;b&gt;Definition 2.2&lt;/b&gt; (Hypothesis v2) &lt;i&gt;A boolean function $h:X\rightarrow Y$, where $X$ is the instance space and $Y$ is the label space
+&lt;/i&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;hypothesis-space-as-equivalence-classes&quot;&gt;Hypothesis Space as Equivalence Classes&lt;/h4&gt;
+
+&lt;p&gt;The aforementioned ambiguity in the hypothesis space can be a point of confusion because there is a disconnect between the models we train in practice and their platonic ideals in a finite hypothesis space. That is, given some thresholding rule $t$, we can produce two logistic regressions $h_w$ and $h_{w’}$ such that $(t\circ h_w)$ and $(t\circ h_{w’})$ give the same mapping of the training data to the labels. Indeed, this may yield some uncertainty when thinking of a Rashomon set of logistic regressions for a finite training data set $E \subset X$ because , again, the Rashomon set is finite but in practice we are searching over the uncountable set of continuous vectors ${w\in \mathbb{R}^p}$ when training our classifiers. &lt;i&gt; If we want to be pedantic, we can understand that in practice the set ${w\in \mathbb{R}^{p}}$ can be considered to be finite because our computers can only use finite numerical precision….&lt;/i&gt;&lt;/p&gt;
+
+&lt;p&gt;At any rate, the following definition from transductive binary classification both formalizes and addresses the aforementioned problem of hypothesis ambiguity.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Definition 2.3&lt;/b&gt; (Hypothesis Space v3) &lt;i&gt;${[h]\ \mid \ h:X\rightarrow Y}$  where the members of the equivalence classes $[h]$ are equivalent under the relation $h\sim h’$ if they are identical in their binary classification of the data. &lt;/i&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;example-using-polynomials&quot;&gt;Example using Polynomials&lt;/h2&gt;
+
+&lt;p&gt;Suppose we seek to learn an unknown ground truth function $y^*(x) = \mathbb{I}_{x^2 -\pi\geq 0}$ and we are given the following knots (training data $\mathcal{D}=X\times Y$). We consider a preliminary search over quintic polynomials with real coefficients. Then we want to use Rashomon set theory to characterize the proportion of  quintic polynomials with non-negative integer coefficients in the $\epsilon$-Rashomon set of polynomials with real coefficients.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;x&lt;/th&gt;
+      &lt;th&gt;y*&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;-1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;1&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;We will define $\mathcal{F}$ as ${h:x\mapsto \mathbb{I}(\sum_{n=0}^5 a_n x^n\geq 0)\mid a_n \in \mathbb{R}, x \in X}$ and $\mathcal{F}’$ as ${h:x\mapsto \mathbb{I}(\sum_{n=0}^5 b_n x^n\geq 0) \mid b_n \in \mathbb{Z}_+, x \in X}\subset \mathcal{F}$ . Note that $\mathcal{F}$ may appear to be uncountably infinite because it is parameterized by real numbers, but it is actually finite because its definition sets the domain of the $h$ to be the 3 point set $X$ and the codomain of all of the $h$ is ${0,1}$ due to the indicator functions $\mathbb{1}$. Similarly,  $\mathcal{F}’$ is finite even though the set of positive integers is countably infinite.&lt;/p&gt;
+
+&lt;p&gt;The empirical risk minimizer which coincides with $y^*$ appears in $\mathcal{F}$ (it has $a_0 = \pi$ and $a_3=2$), but not $\mathcal{F}’$.  $\mathcal{F}$ actually contains all $3^2$ possible mappings while $\mathcal{F}’$ only contains 3 of them (exercise left to the reader). Set the loss $\phi$ to be misclassification error rate. $\mathcal{F}$ contains the empirical risk minimizer, which has misclassification error rate 0. Then if we set $\theta=\frac{1}{3}$, the $\theta$-Rashomon set $\hat{R}_{\text{set}}(\mathcal{F}_1,\mathcal{D}, \phi, \theta)$ would include only 3 models from $\mathcal{F}’$. An example of one of these is the mapping $-1\mapsto 0$, $1\mapsto 1$, $2\mapsto 1$, which has has misclassification error rate of $\frac{1}{3}$. The elements of $\mathcal{F}’$ with $(b_1,b_2,b_3,b_4,b_5) \in {(1,0,0,16,0), (2,3,0,0,0)}$ can be identified as a members of the equivalence class of models  which do the mapping  $-1\mapsto 0$, $1\mapsto 1$, $2\mapsto 1$.&lt;/p&gt;</content><author><name>Ronilo Ragodos</name></author><summary type="html"></summary></entry></feed>
