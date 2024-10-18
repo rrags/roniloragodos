@@ -5,11 +5,9 @@ menu: main
 permalink: /teaching/
 ---
 
-## Current TA responsibilities 
-
-- Data Mining
 
 ## Previous TA responsibilities
+- Fall 2023 - Spring 2023: Data Mining
 
 - Fall 2020 - Spring 2022: Operations Management
 
