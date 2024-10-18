@@ -17,14 +17,15 @@ permalink: /research/
 ### Conference Papers
 - "ProtoX: Explaining a Reinforcement Learning Agent via Prototyping" *NeurIPS*, 2022, with Tong Wang, Qihang Lin, and Xun Zhou.
   [pdf](https://arxiv.org/pdf/2211.03162){: .button}{:target="_blank"} [doi](https://doi.org/10.48550/arXiv.2211.03162){: .button}{:target="_blank"} [data](https://github.com/rrags/ProtoX_NeurIPS){: .button}{:target="_blank"}
-- "On the Incorectness and Inconsistency of Post Hoc Explanations for Business Research" *WITS*, 2023, with Tong Wang, Jeffrey Hu, and Feng Lu
+
 - "On the Incorrectness and Inconsistency of Post Hoc Explanations for Business Research" *POMS*, 2024, with Tong Wang, Jeffrey Hu, and Feng Lu
 - " The Illusion of Interpretation: Post Hoc Explanations Aren’t a Silver Bullet for Business Research" *MAdAiLab Biz AI", 2024, with Tong Wang, Jeffrey Hu, and Feng Lu
 
 ### Workshops
+- "SRRL: Statistically Relevant Rule Lists" *INFORMS DMDA*, 2024, with Marvin Nukunu-Attachey, and Nick Street
+- "On the Incorectness and Inconsistency of Post Hoc Explanations for Business Research" *WITS*, 2023, with Tong Wang, Jeffrey Hu, and Feng Lu
 - "On the Incorectness and Inconsistency of Post Hoc Explanations for Business Research" *INFORMS DMDA*, 2023, with Tong Wang, Jeffrey Hu, and Feng Lu
 
-### Work in progress
-
-- "On the Use of Post-Hoc Explainers for Business Applications" with Tong Wang, Yu (Jeffrey) Hu, and Feng Lu. (Targeted for Management Science).
+### Preprints and Work in progress 
+- "On the Use of Post-Hoc Explainers for Business Applications" with Tong Wang, Yu (Jeffrey) Hu, and Feng Lu. ([Under review + on SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4915307)).
 - "ProtoGAIL: Interpretable Policy Learning via Prototyping for Human Decision Understanding" with Xun Zhou and Tong Wang. . 
