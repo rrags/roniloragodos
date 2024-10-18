@@ -26,6 +26,6 @@ permalink: /research/
 - "On the Incorectness and Inconsistency of Post Hoc Explanations for Business Research" *INFORMS DMDA*, 2023, with Tong Wang, Jeffrey Hu, and Feng Lu
 
 ### Preprints and Work in progress 
-- "On the Use of Post-Hoc Explainers for Business Applications" with Tong Wang, Yu (Jeffrey) Hu, and Feng Lu. ([Under review + on SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4915307)).
+- "From Model Explanation to Data Misinterpretation: Uncovering the Pitfalls of Post Hoc Explainers in Business Research" with Tong Wang, Yu (Jeffrey) Hu, and Feng Lu. ([Under review + on SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4915307)).
 - "GeoPro-Net: Learning interpretable spatiotemporal prediction models through statistically-guided geo-prototyping" by Bang An, Xun Zhou, Zirui Zhou, R. Ragodos, Zenglin Xu, and Jun Luo 
 - "ProtoGAIL: Interpretable Policy Learning via Prototyping for Human Decision Understanding" with Xun Zhou and Tong Wang.  
